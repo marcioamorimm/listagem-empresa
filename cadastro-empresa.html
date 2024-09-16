@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Empresa</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        input[type="text"], input[type="date"], select {
+            padding: 10px;
+            margin-top: 5px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #333;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #555;
+        }
+
+        .actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+
+        .btn {
+            text-decoration: none;
+            padding: 10px 20px;
+            background-color: #333;
+            color: white;
+            border-radius: 5px;
+            font-size: 16px;
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #555;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Cadastro de Empresa</h1>
+
+    <form id="cadastroEmpresaForm">
+        <label for="nome">Nome da Empresa:</label>
+        <input type="text" id="nome" required>
+
+        <label for="cnpj">CNPJ:</label>
+        <input type="text" id="cnpj" required>
+
+        <label for="localizacao">Localização:</label>
+        <select id="localizacao" required>
+            <option value="">Selecione uma cidade</option>
+            <option value="São Paulo">São Paulo</option>
+            <option value="Rio de Janeiro">Rio de Janeiro</option>
+            <option value="Belo Horizonte">Belo Horizonte</option>
+        </select>
+
+        <label for="tipo">Tipo de Empresa:</label>
+        <select id="tipo" required>
+            <option value="">Selecione o tipo de empresa</option>
+            <option value="Pública">Pública</option>
+            <option value="Privada">Privada</option>
+            <option value="Startup">Startup</option>
+        </select>
+
+        <label for="dataCadastro">Data de Cadastro:</label>
+        <input type="date" id="dataCadastro" required>
+
+        <button type="submit">Cadastrar Empresa</button>
+    </form>
+
+    <!-- Ações -->
+    <div class="actions">
+        <a href="listagem-empresas.html" class="btn">Ver Empresas Cadastradas</a>
+        <a href="index.html" class="btn">Voltar ao Início</a>
+    </div>
+</div>
+
+<script>
+    document.getElementById('cadastroEmpresaForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        
+        // Simulando envio do formulário
+        alert("Empresa cadastrada com sucesso!");
+        
+        // Limpar formulário após o cadastro
+        document.getElementById('cadastroEmpresaForm').reset();
+    });
+</script>
+
+</body>
+</html>
