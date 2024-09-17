@@ -4,96 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Listagem de Empresas</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            background-color: #f4f4f4;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            background-color: #fff;
-            padding: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        h1 {
-            text-align: center;
-        }
-
-        .filters {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 20px;
-        }
-
-        .filters div {
-            display: flex;
-            flex-direction: column;
-        }
-
-        input[type="text"], select {
-            padding: 10px;
-            margin-top: 5px;
-            width: 200px;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-
-        table, th, td {
-            border: 1px solid #ddd;
-        }
-
-        th, td {
-            padding: 15px;
-            text-align: left;
-        }
-
-        th {
-            background-color: #f2f2f2;
-        }
-
-        .company-row:hover {
-            background-color: #f1f1f1;
-            cursor: pointer;
-        }
-
-        .no-results {
-            text-align: center;
-            padding: 20px;
-        }
-
-        /* Estilos do botão "Voltar ao Início" */
-        .btn-back {
-            display: inline-block;
-            margin-top: 30px;
-            padding: 10px 20px;
-            font-size: 16px;
-            color: #fff;
-            background-color: #333;
-            text-decoration: none;
-            border-radius: 5px;
-            text-align: center;
-            transition: background-color 0.3s ease;
-        }
-
-        .btn-back:hover {
-            background-color: #555;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="container">
+<div class="container listagem">
     <h1>Listagem de Empresas</h1>
 
-    <!-- Filtros -->
     <div class="filters">
         <div>
             <label for="nome">Nome da Empresa</label>
@@ -121,7 +38,6 @@
         </div>
     </div>
 
-    <!-- Listagem de Empresas -->
     <table id="empresas-table">
         <thead>
             <tr>
@@ -133,47 +49,21 @@
             </tr>
         </thead>
         <tbody id="empresas-list">
-            <tr class="company-row">
-                <td>Empresa A</td>
-                <td>00.000.000/0001-00</td>
-                <td>São Paulo</td>
-                <td>01/09/2024</td>
-                <td>Privada</td>
-            </tr>
-            <tr class="company-row">
-                <td>Empresa B</td>
-                <td>11.111.111/0001-11</td>
-                <td>Rio de Janeiro</td>
-                <td>15/08/2024</td>
-                <td>Pública</td>
-            </tr>
-            <tr class="company-row">
-                <td>Empresa C</td>
-                <td>22.222.222/0001-22</td>
-                <td>Belo Horizonte</td>
-                <td>12/07/2024</td>
-                <td>Startup</td>
-            </tr>
+            <!-- Empresas serão inseridas aqui pelo script -->
         </tbody>
     </table>
 
-    <!-- Mensagem de não encontrado -->
     <div id="no-results" class="no-results" style="display:none;">
         Nenhuma empresa encontrada.
     </div>
 
-    <!-- Botão para voltar ao início -->
-    <div style="text-align: center;">
+    <div style="text-align: center; margin-top: 20px;">
+        <a href="cadastro-empresa.html" class="btn-back">Cadastrar Empresa</a>
         <a href="index.html" class="btn-back">Voltar ao Início</a>
     </div>
-
 </div>
 
 <script>
-    document.getElementById('nome').addEventListener('input', filterEmpresas);
-    document.getElementById('localizacao').addEventListener('change', filterEmpresas);
-    document.getElementById('tipo').addEventListener('change', filterEmpresas);
-
     function filterEmpresas() {
         const nome = document.getElementById('nome').value.toLowerCase();
         const localizacao = document.getElementById('localizacao').value;
@@ -200,6 +90,32 @@
 
         document.getElementById('no-results').style.display = found ? 'none' : 'block';
     }
+
+    document.getElementById('nome').addEventListener('input', filterEmpresas);
+    document.getElementById('localizacao').addEventListener('change', filterEmpresas);
+    document.getElementById('tipo').addEventListener('change', filterEmpresas);
+
+    function loadEmpresas() {
+        const empresas = JSON.parse(localStorage.getItem('empresas')) || [];
+        const tableBody = document.getElementById('empresas-list');
+
+        empresas.forEach(empresa => {
+            const row = document.createElement('tr');
+            row.className = 'company-row';
+            row.innerHTML = `
+                <td>${empresa.nome}</td>
+                <td>${empresa.cnpj}</td>
+                <td>${empresa.localizacao}</td>
+                <td>${empresa.dataCadastro}</td>
+                <td>${empresa.tipo}</td>
+            `;
+            tableBody.appendChild(row);
+        });
+
+        filterEmpresas(); // Aplicar filtros se houver
+    }
+
+    window.onload = loadEmpresas;
 </script>
 
 </body>

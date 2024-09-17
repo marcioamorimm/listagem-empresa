@@ -4,83 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro de Empresa</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            background-color: #f4f4f4;
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background-color: #fff;
-            padding: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        h1 {
-            text-align: center;
-        }
-
-        form {
-            display: flex;
-            flex-direction: column;
-        }
-
-        label {
-            margin-top: 10px;
-            font-weight: bold;
-        }
-
-        input[type="text"], input[type="date"], select {
-            padding: 10px;
-            margin-top: 5px;
-            width: 100%;
-            box-sizing: border-box;
-        }
-
-        button {
-            margin-top: 20px;
-            padding: 10px;
-            background-color: #333;
-            color: white;
-            border: none;
-            cursor: pointer;
-            font-size: 16px;
-            border-radius: 5px;
-        }
-
-        button:hover {
-            background-color: #555;
-        }
-
-        .actions {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 30px;
-        }
-
-        .btn {
-            text-decoration: none;
-            padding: 10px 20px;
-            background-color: #333;
-            color: white;
-            border-radius: 5px;
-            font-size: 16px;
-            text-align: center;
-            transition: background-color 0.3s ease;
-        }
-
-        .btn:hover {
-            background-color: #555;
-        }
-
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="container">
+<div class="container cadastro">
     <h1>Cadastro de Empresa</h1>
 
     <form id="cadastroEmpresaForm">
@@ -88,7 +16,7 @@
         <input type="text" id="nome" required>
 
         <label for="cnpj">CNPJ:</label>
-        <input type="text" id="cnpj" required>
+        <input type="text" id="cnpj" maxlength="18" required>
 
         <label for="localizacao">Localização:</label>
         <select id="localizacao" required>
@@ -112,7 +40,6 @@
         <button type="submit">Cadastrar Empresa</button>
     </form>
 
-    <!-- Ações -->
     <div class="actions">
         <a href="listagem-empresas.html" class="btn">Ver Empresas Cadastradas</a>
         <a href="index.html" class="btn">Voltar ao Início</a>
@@ -120,13 +47,48 @@
 </div>
 
 <script>
+    function formatCNPJ(cnpj) {
+        cnpj = cnpj.replace(/\D/g, ''); // Remove tudo que não é dígito
+        if (cnpj.length <= 14) {
+            cnpj = cnpj.replace(/^(\d{2})(\d)/, '$1.$2');
+            cnpj = cnpj.replace(/^(\d{2})\.(\d{3})(\d)/, '$1.$2.$3');
+            cnpj = cnpj.replace(/\.(\d{3})(\d)/, '.$1/$2');
+            cnpj = cnpj.replace(/(\d{4})(\d)/, '$1-$2');
+        }
+        return cnpj;
+    }
+
+    document.getElementById('cnpj').addEventListener('input', function (e) {
+        e.target.value = formatCNPJ(e.target.value);
+    });
+
     document.getElementById('cadastroEmpresaForm').addEventListener('submit', function(event) {
         event.preventDefault();
-        
-        // Simulando envio do formulário
+
+        const nome = document.getElementById('nome').value;
+        const cnpj = document.getElementById('cnpj').value;
+        const localizacao = document.getElementById('localizacao').value;
+        const tipo = document.getElementById('tipo').value;
+        const dataCadastro = document.getElementById('dataCadastro').value;
+
+        // Cria um objeto com os dados da empresa
+        const empresa = {
+            nome,
+            cnpj,
+            localizacao,
+            tipo,
+            dataCadastro
+        };
+
+        // Obtém a lista de empresas do Local Storage ou cria uma nova lista
+        const empresas = JSON.parse(localStorage.getItem('empresas')) || [];
+        empresas.push(empresa);
+
+        // Salva a lista de empresas no Local Storage
+        localStorage.setItem('empresas', JSON.stringify(empresas));
+
         alert("Empresa cadastrada com sucesso!");
         
-        // Limpar formulário após o cadastro
         document.getElementById('cadastroEmpresaForm').reset();
     });
 </script>

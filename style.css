@@ -1,0 +1,155 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background-color: #f0f0f0;
+}
+
+.container {
+    margin: 0 auto;
+    background-color: #ffffff; 
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+}
+
+h1 {
+    text-align: center;
+    color: #2c3e50; 
+}
+
+.btn, .btn-back {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #3498db; 
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    text-align: center;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover, .btn-back:hover {
+    background-color: #2980b9; 
+}
+
+/* Página Inicial */
+.container.home {
+    max-width: 800px;
+    text-align: center;
+    margin-top: 80px; /* Ajuste conforme necessário */
+}
+
+.btn {
+    margin: 15px;
+    padding: 15px 25px;
+    font-size: 18px;
+}
+
+/* Página de Listagem de Empresas */
+.container.listagem {
+    max-width: 1200px;
+}
+
+.filters {
+    display: flex;
+    flex-wrap: wrap; /* Permite que os filtros se ajustem em múltiplas linhas, se necessário */
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.filters div {
+    flex: 1;
+    min-width: 200px;
+    margin: 0 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.filters label {
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #2c3e50; /* Cor dos rótulos dos filtros */
+}
+
+input[type="text"], select {
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 15px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+    color: #4682b4; /* Azul Steel para todos os títulos de colunas */
+}
+
+.company-row:hover {
+    background-color: #f1f1f1;
+    cursor: pointer;
+}
+
+.no-results {
+    text-align: center;
+    padding: 20px;
+}
+
+/* Página de Cadastro de Empresa */
+.container.cadastro {
+    max-width: 800px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+input[type="text"], input[type="date"], select {
+    padding: 10px;
+    margin-top: 5px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+button {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #3498db; /* Azul vibrante */
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #2980b9; /* Azul escuro no hover */
+}
+
+.actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+}
